@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://user:password@db:5432/docit  # Adjust credentials as needed
+      EMAIL_SERVER: smtp://your_email_smtp
+      EMAIL_FROM: your_email@example.com
+      GOOGLE_ID: your_google_id
+      GOOGLE_SECRET: your_google_secret
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: docit
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:

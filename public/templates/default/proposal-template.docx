@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<w:document>
+  <w:body>
+    <w:p>
+      <w:r><w:t>Event Proposal: {{event.title}}</w:t></w:r>
+    </w:p>
+    <w:p>
+      <w:r>
+        <w:t>Date: {{event.startsAt}} to {{event.endsAt}}</w:t>
+      </w:r>
+    </w:p>
+    <w:p>
+      <w:r><w:t>Venue: {{event.venue}}</w:t></w:r>
+    </w:p>
+    <w:p>
+      <w:r><w:t>Objectives:</w:t></w:r>
+    </w:p>
+    <w:p>
+      <w:r><w:t>{{event.objectives}}</w:t></w:r>
+    </w:p>
+    {{#each speakers}}
+    <w:p>
+      <w:r><w:t>Speaker: {{name}} ({{designation}})</w:t></w:r>
+    </w:p>
+    {{/each}}
+  </w:body>
+</w:document>
