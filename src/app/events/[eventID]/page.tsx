@@ -6,6 +6,7 @@ import { EventStatusBadge } from "@/components/events/EventStatusBadge";
 import { DocumentGenerator } from "@/components/documents/DocumentGenerator";
 import { CertificateGenerator } from "@/components/certificates/CertificateGenerator";
 import { formatCurrency } from "@/lib/utils";
+import { archiveEventAction } from "@/server/actions/events";
 const canEdit = ["CHAIR", "DOCS"].includes(membership.role);
 
 export const metadata = { title: "Event Details" };
@@ -217,6 +218,18 @@ export default async function EventDetailPage({
               participantCount={event.participantCount || 0}
             />
           )}
+
+          {/* Archive Event */}
+            {membership.role === "CHAIR" && event.status !== 'ARCHIVED' && (
+              <form action={async () => {
+                "use server";
+                await archiveEventAction(event.id);
+              }}>
+                <button type="submit" className="btn btn-danger w-full mt-4">
+                  Archive Event
+                </button>
+              </form>
+            )}            
 
           {/* Approve Documents */}
           {membership.role === "CHAIR" || membership.role === "ADVISOR" ? (
